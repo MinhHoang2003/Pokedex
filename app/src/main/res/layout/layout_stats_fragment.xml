@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textHP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_title_hp"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/textHP_index"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textHP_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_index"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/textHP"
+            app:layout_constraintRight_toLeftOf="@id/progressHP"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressHP"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:max="100"
+            android:minWidth="240dp"
+            android:minHeight="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/textHP_index"
+            app:layout_constraintLeft_toRightOf="@id/textHP_index"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textATK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_title_atk"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/textATK_index"
+            app:layout_constraintTop_toBottomOf="@id/textHP" />
+
+        <TextView
+            android:id="@+id/textATK_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_index"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/textATK"
+            app:layout_constraintRight_toLeftOf="@+id/progressATK"
+            app:layout_constraintTop_toBottomOf="@id/textHP" />
+
+        <ProgressBar
+            android:id="@+id/progressATK"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:max="100"
+            android:minWidth="240dp"
+            android:minHeight="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/textATK_index"
+            app:layout_constraintLeft_toRightOf="@id/textATK_index"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressHP" />
+
+        <TextView
+            android:id="@+id/textDEF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_title_def"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/textDEF_index"
+            app:layout_constraintTop_toBottomOf="@id/textATK" />
+
+        <TextView
+            android:id="@+id/textDEF_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_index"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/textDEF"
+            app:layout_constraintRight_toLeftOf="@+id/progressDEF"
+            app:layout_constraintTop_toBottomOf="@id/textATK" />
+
+        <ProgressBar
+            android:id="@+id/progressDEF"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:max="100"
+            android:minWidth="240dp"
+            android:minHeight="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/textDEF_index"
+            app:layout_constraintLeft_toRightOf="@id/textDEF_index"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressATK" />
+
+        <TextView
+            android:id="@+id/textSATK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_title_satk"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/textSATK_index"
+            app:layout_constraintTop_toBottomOf="@id/textDEF" />
+
+        <TextView
+            android:id="@+id/textSATK_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_index"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/textSATK"
+            app:layout_constraintRight_toLeftOf="@+id/progressSATK"
+            app:layout_constraintTop_toBottomOf="@id/textDEF" />
+
+        <ProgressBar
+            android:id="@+id/progressSATK"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:max="100"
+            android:minWidth="240dp"
+            android:minHeight="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/textSATK_index"
+            app:layout_constraintLeft_toRightOf="@id/textSATK_index"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressDEF" />
+
+        <TextView
+            android:id="@+id/textSDEF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_title_sdef"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/textSDEF_index"
+            app:layout_constraintTop_toBottomOf="@id/textSATK" />
+
+        <TextView
+            android:id="@+id/textSDEF_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_index"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/textSDEF"
+            app:layout_constraintRight_toLeftOf="@+id/progressSDEF"
+            app:layout_constraintTop_toBottomOf="@id/textSATK" />
+
+        <ProgressBar
+            android:id="@+id/progressSDEF"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:max="100"
+            android:minWidth="240dp"
+            android:minHeight="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/textSDEF_index"
+            app:layout_constraintLeft_toRightOf="@id/textSDEF_index"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressSATK" />
+
+        <TextView
+            android:id="@+id/textSPD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_title_sdef"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/textSPD_index"
+            app:layout_constraintTop_toBottomOf="@id/textSDEF" />
+
+        <TextView
+            android:id="@+id/textSPD_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/text_index"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/textSPD"
+            app:layout_constraintRight_toLeftOf="@+id/progressSPD"
+            app:layout_constraintTop_toBottomOf="@id/textSDEF" />
+
+        <ProgressBar
+            android:id="@+id/progressSPD"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:max="100"
+            android:minWidth="240dp"
+            android:minHeight="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/textSPD_index"
+            app:layout_constraintLeft_toRightOf="@id/textSPD_index"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressSDEF" />
+
+        <TextView
+            android:id="@+id/textTitleWeakness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:text="@string/text_weaknesses"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textSPD" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerWeaknesses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:nestedScrollingEnabled="false"
+            android:padding="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textTitleWeakness" />
+
+        <TextView
+            android:id="@+id/textAbility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@string/text_abilities"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerWeaknesses" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerAbilities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textAbility" />
+
+        <TextView
+            android:id="@+id/textBreeding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@string/text_breeding"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerAbilities" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutBreeding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textBreeding">
+
+
+            <View
+                android:id="@+id/divider01"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/soft_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/divider02"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider02"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/soft_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/divider01"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guid1"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/dark_sky_blue"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.35" />
+
+            <TextView
+                android:id="@+id/textEggGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_egg_group"
+                android:textColor="@color/dark_sky_blue"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guid1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textEggGroupDetail01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Monster"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guid1"
+                app:layout_constraintTop_toBottomOf="@id/textEggGroup" />
+
+            <TextView
+                android:id="@+id/textEggGroupDetail02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Water 1"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guid1"
+                app:layout_constraintTop_toBottomOf="@id/textEggGroupDetail01" />
+
+            <TextView
+                android:id="@+id/textHatchTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hatch Time"
+                android:textColor="@color/dark_sky_blue"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guid1"
+                app:layout_constraintRight_toLeftOf="@id/guid2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textHatchTimeDetail01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="5101 steps"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guid1"
+                app:layout_constraintRight_toLeftOf="@id/guid2"
+                app:layout_constraintTop_toBottomOf="@id/textEggGroup" />
+
+            <TextView
+                android:id="@+id/textHatchTimeDetail02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="20 cycles"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guid1"
+                app:layout_constraintRight_toLeftOf="@id/guid2"
+                app:layout_constraintTop_toBottomOf="@id/textEggGroupDetail01" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guid2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.68" />
+
+
+            <TextView
+                android:id="@+id/textGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textColor="@color/dark_sky_blue"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guid2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textGenderDetail01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="12.5 %"
+                android:textColor="#ce71e1"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guid2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textGender" />
+
+            <TextView
+                android:id="@+id/textGenderDetail02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="87.5 %"
+                android:textColor="#80b6f4"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guid2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textEggGroupDetail01" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/textCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Capture"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutBreeding" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutCapture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/textCapture">
+
+            <View
+                android:id="@+id/divider03"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/soft_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/divider04"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider04"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/soft_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/divider03"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textHabitat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Habitat"
+                android:textColor="@color/dark_sky_blue"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guidCapture01"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textHabitatDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:text="Waters-Edge"
+                android:textColor="#4f4f4f"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guidCapture01"
+                app:layout_constraintTop_toBottomOf="@id/textHabitat" />
+
+            <TextView
+                android:id="@+id/textGenerationDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:text="Generation 1"
+                android:textColor="#4f4f4f"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guidCapture01"
+                app:layout_constraintRight_toLeftOf="@id/guidCapture02"
+                app:layout_constraintTop_toBottomOf="@id/textGeneration" />
+
+            <TextView
+                android:id="@+id/textCaptureRateDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:text="45 %"
+                android:textColor="#4f4f4f"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guidCapture02"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textCaptureRate" />
+
+            <TextView
+                android:id="@+id/textGeneration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Generation"
+                android:textColor="@color/dark_sky_blue"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guidCapture01"
+                app:layout_constraintRight_toLeftOf="@id/guidCapture02"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textCaptureRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Capture Rate"
+                android:textColor="@color/dark_sky_blue"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guidCapture02"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidCapture01"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/dark_sky_blue"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.35" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidCapture02"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.68" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textSprites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Sprites"
+            android:textColor="@color/dark_sky_blue"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutCapture" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutSprites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textSprites">
+
+            <View
+                android:id="@+id/divider05"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/soft_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Normal"
+                android:textColor="@color/dark_sky_blue"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guidSprites"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageNormal"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/image_sqirtle"
+                android:layout_marginTop="17dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guidSprites"
+                app:layout_constraintTop_toBottomOf="@id/textNormal" />
+
+
+            <ImageView
+                android:id="@+id/imageShiny"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/image_wartortle"
+                android:layout_marginTop="17dp"
+                app:layout_constraintLeft_toRightOf="@id/guidSprites"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textShiny" />
+
+
+            <TextView
+                android:id="@+id/textShiny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shiny"
+                android:textColor="@color/dark_sky_blue"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@id/guidSprites"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidSprites"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/dark_sky_blue"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

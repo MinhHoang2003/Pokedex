@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#69b9e3</color>
+    <color name="dark_sky_blue">#559edf</color>
+    <color name="soft_blue">#69b9e3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="itemTittle">#4f4f4f</color>
+    <color name="itemDetail">#a4a4a4</color>
+    <color name="color_1">#6e95fd</color>
+    <color name="color_2">#6fdefa</color>
+    <color name="color_3">#8de061</color>
+    <color name="color_4">#51e85e</color>
+
+
+</resources>

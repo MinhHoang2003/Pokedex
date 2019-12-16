@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="375dp"
+    android:layout_height="150dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imagePokemonFrom"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/image_sqirtle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/imageArrow"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textLevelDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lv.16"
+        android:textColor="@color/dark_sky_blue"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/imageArrow"
+        app:layout_constraintLeft_toLeftOf="@id/imageArrow"
+        app:layout_constraintRight_toRightOf="@id/imageArrow" />
+
+    <ImageView
+        android:id="@+id/imageArrow"
+        android:layout_width="94dp"
+        android:layout_height="9dp"
+        android:src="@drawable/image_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/imagePokemonFrom"
+        app:layout_constraintRight_toLeftOf="@id/imagePokemonTo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imagePokemonTo"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/image_wartortle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/imageArrow"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/text_pokemon_name_sample"
+        app:layout_constraintLeft_toLeftOf="@id/imagePokemonFrom"
+        app:layout_constraintRight_toRightOf="@id/imagePokemonFrom"
+        app:layout_constraintTop_toBottomOf="@id/imagePokemonFrom" />
+
+    <TextView
+        android:id="@+id/textTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/text_pokemon_name_sample"
+        app:layout_constraintLeft_toLeftOf="@id/imagePokemonTo"
+        app:layout_constraintRight_toRightOf="@id/imagePokemonTo"
+        app:layout_constraintTop_toBottomOf="@id/imagePokemonTo" />
+
+    <View
+        android:id="@+id/divider"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/soft_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

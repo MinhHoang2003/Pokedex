@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">PokemonApp</string>
+    <string name="text_pokemon_detail_sample">Squirtle’s shell is not merely used for protection.\nThe shell’s rounded shape and the grooves on its\nsurface help minimize resistance in water,\nenabling this pokemon to swim at high speed.</string>
+    <string name="text_pokemon_name_sample">Squirtle</string>
+    <string name="text_title_hp">HP</string>
+    <string name="text_index">000</string>
+    <string name="text_title_atk">ATK</string>
+    <string name="text_title_def">DEF</string>
+    <string name="text_title_sdef">SDEF</string>
+    <string name="text_title_satk">SATK</string>
+    <string name="text_weaknesses">Weaknesses</string>
+    <string name="text_abilities">Abilities</string>
+    <string name="text_breeding">Breeding</string>
+    <string name="text_egg_group">Egg Group</string>
+    <string name="text_head_pokemon">Pokemon</string>
+    <string name="text_head_move">Moves</string>
+    <string name="text_head_item">Items</string>
+    <string name="text_price_sample">1200</string>
+    <string name="text_item_sample">Master Ball</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_header_item_sample">Ultra Ball</string>
+    <string name="text_item_description_sample">Used in Battle\n\n   Attempts to catch a wild Pokémon, using a catch\n rate of 2x.  If used in a trainer battle, nothing happens and\n  the ball is lost.</string>
+    <string name="text_move_sample">Bubble</string>
+    <string name="text_move_descrption_sample">Inflicts regular damage. Has a 10% chance to\n  lower the target’s Speed by one stage.</string>
+</resources>
