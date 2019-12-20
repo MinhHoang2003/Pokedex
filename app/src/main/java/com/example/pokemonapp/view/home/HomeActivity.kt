@@ -125,39 +125,19 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun searchData(query: String) {
-        when (currentTag) {
-            TAG_POKEMON -> {
-                if (query.isNotEmpty()) {
-                    homeViewModel.isSearching = true
-                    homeViewModel.canLoadMore = false
+        if (query.isNotEmpty()) {
+            homeViewModel.isSearching = true
+            homeViewModel.canLoadMore = false
 
-                } else {
-                    Log.d("search", "in empty search")
-                    homeViewModel.isSearching = true
-                    homeViewModel.canLoadMore = true
-                }
-                homeViewModel.searchPokemon(query)
-            }
-            TAG_ITEMS -> {
-                if (query.isNotEmpty()) {
-                    homeViewModel.isSearching = true
-                    homeViewModel.canLoadMore = false
-                } else {
-                    homeViewModel.isSearching = true
-                    homeViewModel.canLoadMore = true
-                }
-                homeViewModel.searchItems(query)
-            }
-            TAG_MOVES -> {
-                if (query.isNotEmpty()) {
-                    homeViewModel.isSearching = true
-                    homeViewModel.canLoadMore = false
-                } else {
-                    homeViewModel.isSearching = true
-                    homeViewModel.canLoadMore = true
-                }
-                homeViewModel.searchMove(query)
-            }
+        } else {
+            Log.d("search", "in empty search")
+            homeViewModel.isSearching = true
+            homeViewModel.canLoadMore = true
+        }
+        when (currentTag) {
+            TAG_POKEMON -> homeViewModel.searchPokemon(query)
+            TAG_ITEMS -> homeViewModel.searchItems(query)
+            TAG_MOVES -> homeViewModel.searchMove(query)
         }
     }
 
