@@ -27,4 +27,13 @@ class PokemonRepository(val service: Service) {
             } else return@withContext Result.Error(Exception(response.message()))
         }
     }
+
+    suspend fun searchPokemon(name: String): Result<Pokemons?> {
+        return withContext(Dispatchers.IO) {
+            val response = service.searchPokemon(name)
+            if (response.isSuccessful) {
+                return@withContext Result.Succeess(response.body())
+            } else return@withContext Result.Error(Exception(response.message()))
+        }
+    }
 }

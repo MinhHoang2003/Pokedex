@@ -21,11 +21,17 @@ interface Service {
     @GET("api/v1/moves")
     suspend fun getMoves(@Query("page") page: Int? = 1): Response<Moves>
 
+    @GET("api/v1/moves")
+    suspend fun searchMove(@Query("name") name: String): Response<Moves>
+
     @GET("api/v1/moves/{name}")
     suspend fun getMove(@Path("name") name: String): Response<Move>
 
     @GET("api/v1/pokemons")
     suspend fun getPokemons(@Query("page") page: Int? = 1): Response<Pokemons>
+
+    @GET("api/v1/pokemons")
+    suspend fun searchPokemon(@Query("name") name: String): Response<Pokemons>
 
     @GET("api/v1/pokemons/{id}")
     suspend fun getPokemon(@Path("id") id: String): Response<PokemonDetailModel>

@@ -17,12 +17,13 @@ import com.example.pokemonapp.data.remote.Service
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
-    val service = RemoteClient.getClient().create(Service::class.java)
+    private val service: Service = RemoteClient.getClient().create(Service::class.java)
     private val pokemonRepository = PokemonRepository(service)
     private val moveRepository = MoveRepository(service)
     private val itemRepository = ItemRepository(service)
 
-    val query = MutableLiveData<String>()
+    var isSearching = false
+    var canLoadMore = true
 
     private val _pokemons = MutableLiveData<Pokemons>()
     val pokemons: LiveData<Pokemons> = _pokemons
@@ -82,6 +83,33 @@ class HomeViewModel : ViewModel() {
         val result = pokemonRepository.getPokemonById(id)
         if (result is Result.Succeess) {
             _pokemon.value = result.data
+        } else {
+            _isException.value = result.toString()
+        }
+    }
+
+    fun searchPokemon(name: String) = viewModelScope.launch {
+        val result = pokemonRepository.searchPokemon(name)
+        if (result is Result.Succeess) {
+            _pokemons.value = result.data
+        } else {
+            _isException.value = result.toString()
+        }
+    }
+
+    fun searchMove(name: String) = viewModelScope.launch {
+        val result = moveRepository.searchMove(name)
+        if (result is Result.Succeess) {
+            _moves.value = result.data
+        } else {
+            _isException.value = result.toString()
+        }
+    }
+
+    fun searchItems(name: String) = viewModelScope.launch {
+        val result = itemRepository.searchItems(name)
+        if (result is Result.Succeess) {
+            _items.value = result.data
         } else {
             _isException.value = result.toString()
         }

@@ -2,6 +2,7 @@ package com.example.pokemonapp.view.home
 
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -100,7 +101,8 @@ class HomeActivity : AppCompatActivity() {
                 if (currentText != text.toString()) {
                     currentText = text.toString()
                     withContext(Dispatchers.Main) {
-                        homeViewModel.query.value = currentText
+                        //                        homeViewModel.query.value = currentText
+                        searchData(currentText)
                     }
                 }
             }
@@ -119,6 +121,43 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager.inTransaction {
             setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
             replace(R.id.fragment_container, fragment, currentTag)
+        }
+    }
+
+    private fun searchData(query: String) {
+        when (currentTag) {
+            TAG_POKEMON -> {
+                if (query.isNotEmpty()) {
+                    homeViewModel.isSearching = true
+                    homeViewModel.canLoadMore = false
+
+                } else {
+                    Log.d("search", "in empty search")
+                    homeViewModel.isSearching = true
+                    homeViewModel.canLoadMore = true
+                }
+                homeViewModel.searchPokemon(query)
+            }
+            TAG_ITEMS -> {
+                if (query.isNotEmpty()) {
+                    homeViewModel.isSearching = true
+                    homeViewModel.canLoadMore = false
+                } else {
+                    homeViewModel.isSearching = true
+                    homeViewModel.canLoadMore = true
+                }
+                homeViewModel.searchItems(query)
+            }
+            TAG_MOVES -> {
+                if (query.isNotEmpty()) {
+                    homeViewModel.isSearching = true
+                    homeViewModel.canLoadMore = false
+                } else {
+                    homeViewModel.isSearching = true
+                    homeViewModel.canLoadMore = true
+                }
+                homeViewModel.searchMove(query)
+            }
         }
     }
 

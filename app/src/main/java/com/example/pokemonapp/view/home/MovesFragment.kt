@@ -42,11 +42,12 @@ class MovesFragment : Fragment() {
     private fun observerData(context: Context) {
         homeViewModel.getMoves(1)
         homeViewModel.moves.observe(this, Observer { it ->
-            if (movesAdapter == null) {
+            if (movesAdapter == null || homeViewModel.isSearching) {
                 movesAdapter = MovesAdapter(it, context)
                 val linearLayoutManager = LinearLayoutManager(context)
                 recyclerView.layoutManager = linearLayoutManager
                 recyclerView.adapter = movesAdapter
+                if (homeViewModel.canLoadMore) homeViewModel.isSearching = false
             } else {
                 val data = movesAdapter!!.data.moves
                 val scrollPosition = data.size - 1
@@ -71,14 +72,6 @@ class MovesFragment : Fragment() {
             }
 
         })
-        homeViewModel.query.observe(this,
-            Observer<String> { t ->
-                if (isLoading.value == false) {
-                    movesAdapter?.filter?.filter(t)
-                }
-            }
-
-        )
     }
 
     private fun initScrollListener() {

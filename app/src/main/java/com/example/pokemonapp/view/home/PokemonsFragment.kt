@@ -59,12 +59,14 @@ class PokemonsFragment : Fragment() {
         })
         homeViewModel.getPokemons(1)
         homeViewModel.pokemons.observe(this, Observer { it ->
-            if (pokemonsAdapter == null) {
+            if (pokemonsAdapter == null || homeViewModel.isSearching) {
                 pokemonsAdapter = PokemonsAdapter(it, context)
                 val linearLayoutManager = LinearLayoutManager(context)
                 recyclerView.layoutManager = linearLayoutManager
                 recyclerView.adapter = pokemonsAdapter
-            } else {
+                if (homeViewModel.canLoadMore) homeViewModel.isSearching = false
+            } else if (homeViewModel.isSearching == false) {
+                Log.d("search", "${homeViewModel.isSearching}")
                 val data = pokemonsAdapter!!.data.pokemons
                 val scrollPosition = data.size - 1
                 data.removeAt(data.size - 1)
@@ -77,7 +79,6 @@ class PokemonsFragment : Fragment() {
                     "load_more",
                     "in adapter ${pokemonsAdapter!!.data.pokemons.size} focus on $scrollPosition"
                 )
-//                recyclerView.scrollToPosition(scrollPosition - 1)
                 isLoadMore = false
             }
             pokemonsAdapter?.onItemsClick = {
@@ -90,13 +91,6 @@ class PokemonsFragment : Fragment() {
             }
 
         })
-
-        homeViewModel.query.observe(this,
-            Observer<String> { t ->
-                if (isLoading.value == false) {
-                    pokemonsAdapter?.filter?.filter(t)
-                }
-            })
     }
 
 
@@ -139,7 +133,7 @@ class PokemonsFragment : Fragment() {
                     dataSize < total
                 ) {
                     Log.d("load_more", "in scroll listener $dataSize $total")
-                    if (!isLoadMore) {
+                    if (!isLoadMore && !homeViewModel.isSearching) {
                         loadMore()
                         isLoadMore = true
                     }

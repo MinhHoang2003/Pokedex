@@ -26,4 +26,13 @@ class MoveRepository(private val service: Service) {
         }
     }
 
+    suspend fun searchMove(name: String): Result<Moves?> {
+        return withContext(Dispatchers.IO) {
+            val response = service.searchMove(name)
+            if (response.isSuccessful) {
+                return@withContext Result.Succeess(response.body())
+            } else return@withContext Result.Error(Exception(response.message()))
+        }
+    }
+
 }

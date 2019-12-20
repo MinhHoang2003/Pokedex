@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 
 class ItemRepository(private val service: Service) {
 
-    suspend fun getItems(page : Int): Result<Items?> {
+    suspend fun getItems(page: Int): Result<Items?> {
         return withContext(Dispatchers.IO) {
             val response = service.getItems(page)
             if (response.isSuccessful) {
