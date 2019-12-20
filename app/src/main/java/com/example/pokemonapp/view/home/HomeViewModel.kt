@@ -17,7 +17,7 @@ import com.example.pokemonapp.data.remote.Service
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
-    val service = RemoteClient.getClien().create(Service::class.java)
+    val service = RemoteClient.getClient().create(Service::class.java)
     private val pokemonRepository = PokemonRepository(service)
     private val moveRepository = MoveRepository(service)
     private val itemRepository = ItemRepository(service)
@@ -42,21 +42,21 @@ class HomeViewModel : ViewModel() {
     private val _isException = MutableLiveData<String>()
     val isExeption: LiveData<String> = _isException
 
-    fun getPokemons() = viewModelScope.launch {
+    fun getPokemons(page: Int) = viewModelScope.launch {
         _isLoading.value = true
-        val result = pokemonRepository.getPokemons()
+        val result = pokemonRepository.getPokemons(page)
         if (result is Result.Succeess) {
-            _isLoading.value = false;
+            _isLoading.value = false
             _pokemons.value = result.data
         } else {
-            _isLoading.value = false;
+            _isLoading.value = false
             _isException.value = result.toString()
         }
     }
 
-    fun getMoves() = viewModelScope.launch {
+    fun getMoves(page: Int?) = viewModelScope.launch {
         _isLoading.value = true
-        val result = moveRepository.getMoves()
+        val result = moveRepository.getMoves(page)
         if (result is Result.Succeess) {
             _isLoading.value = false
             _moves.value = result.data
@@ -66,9 +66,9 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun getItems() = viewModelScope.launch {
+    fun getItems(page: Int) = viewModelScope.launch {
         _isLoading.value = true
-        val result = itemRepository.getItems()
+        val result = itemRepository.getItems(page)
         if (result is Result.Succeess) {
             _isLoading.value = false
             _items.value = result.data

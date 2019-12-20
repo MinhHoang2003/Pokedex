@@ -8,9 +8,9 @@ import kotlinx.coroutines.withContext
 
 class ItemRepository(private val service: Service) {
 
-    suspend fun getItems(): Result<Items?> {
+    suspend fun getItems(page : Int): Result<Items?> {
         return withContext(Dispatchers.IO) {
-            val response = service.getItems()
+            val response = service.getItems(page)
             if (response.isSuccessful) {
                 return@withContext Result.Succeess(response.body())
             } else return@withContext Result.Error(Exception(response.message()))
@@ -23,6 +23,15 @@ class ItemRepository(private val service: Service) {
             if (response.isSuccessful) {
                 return@withContext Result.Succeess(response.body())
             } else return@withContext Result.Error(Exception(response.message()))
+        }
+    }
+
+    suspend fun searchItems(name: String): Result<Items?> {
+        return withContext(Dispatchers.IO) {
+            val response = service.searchItems(name)
+            if (response.isSuccessful) {
+                return@withContext Result.Succeess(response.body())
+            } else return@withContext Result.Error(Exception(response.toString()))
         }
     }
 }

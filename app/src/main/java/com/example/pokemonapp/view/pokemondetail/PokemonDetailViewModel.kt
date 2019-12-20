@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class PokemonDetailViewModel : ViewModel() {
 
-    private val service: Service = RemoteClient.getClien().create(Service::class.java)
+    private val service: Service = RemoteClient.getClient().create(Service::class.java)
     val pokemonRepository = PokemonRepository(service)
 
     private val _pokemonDetail = MutableLiveData<PokemonDetailModel>()

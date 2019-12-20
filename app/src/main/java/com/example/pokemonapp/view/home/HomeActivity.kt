@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.pokemonapp.R
 import com.example.pokemonapp.hideKeyboard
 import com.example.pokemonapp.inTransaction
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.*
 
@@ -41,7 +40,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.layout_home_activity)
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         initView()
-        loadFragment(HomeFragment(), TAG_POKEMON)
+        loadFragment(PokemonsFragment())
     }
 
     private fun initView() {
@@ -52,13 +51,23 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigation = findViewById(R.id.bottomNavigation)
         progress = findViewById(R.id.progressOnLoading)
         bottomNavigation.setOnNavigationItemSelectedListener {
-            val type = when (it.itemId) {
-                R.id.menu_move -> TAG_MOVES
-                R.id.menu_item -> TAG_ITEMS
-                R.id.menu_pokemon -> TAG_POKEMON
+            val fragment = when (it.itemId) {
+                R.id.menu_move -> {
+                    currentTag = TAG_MOVES
+                    MovesFragment()
+                }
+                R.id.menu_item -> {
+                    currentTag = TAG_ITEMS
+                    ItemsFragment()
+                }
+                R.id.menu_pokemon -> {
+                    currentTag = TAG_POKEMON
+                    PokemonsFragment()
+                }
                 else -> return@setOnNavigationItemSelectedListener false
             }
-            loadFragment(HomeFragment(), type)
+            searchContainer.text.clear()
+            loadFragment(fragment)
             return@setOnNavigationItemSelectedListener true
         }
         val gradientDrawableForMainBackground = GradientDrawable(
@@ -90,7 +99,7 @@ class HomeActivity : AppCompatActivity() {
                 delay(500)
                 if (currentText != text.toString()) {
                     currentText = text.toString()
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
                         homeViewModel.query.value = currentText
                     }
                 }
@@ -99,21 +108,17 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun loadFragment(fragment: Fragment, type: String) {
-        currentTag = type
+    private fun loadFragment(fragment: Fragment) {
         toolbarTitle.text = currentTag
-        if (fragment is HomeFragment) {
+        if (fragment is PokemonsFragment) {
             fragment.isLoading.observe(this, Observer {
                 if (it) progress.visibility = View.VISIBLE
                 else progress.visibility = View.INVISIBLE
             })
         }
-        val bundle = Bundle()
-        bundle.putString("type", type)
-        fragment.arguments = bundle
         supportFragmentManager.inTransaction {
             setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-            replace(R.id.fragment_container, fragment, type)
+            replace(R.id.fragment_container, fragment, currentTag)
         }
     }
 

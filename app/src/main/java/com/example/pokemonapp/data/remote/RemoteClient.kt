@@ -7,7 +7,7 @@ class RemoteClient {
     companion object {
         private const val BASE_URL = "http://app11.lifetimetech.vn/pokedex/"
         var CLIENT: Retrofit? = null
-        fun getClien(): Retrofit = CLIENT ?: synchronized(this) {
+        fun getClient(): Retrofit = CLIENT ?: synchronized(this) {
             return buildClient()
         }
 

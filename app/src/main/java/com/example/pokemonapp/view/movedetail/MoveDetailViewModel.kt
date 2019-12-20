@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class MoveDetailViewModel : ViewModel() {
 
 
-    private val service: Service = RemoteClient.getClien().create(Service::class.java)
+    private val service: Service = RemoteClient.getClient().create(Service::class.java)
     val moveRepository = MoveRepository(service)
 
     private val _move = MutableLiveData<Move>()

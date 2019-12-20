@@ -15,29 +15,57 @@ import com.example.pokemonapp.Type
 import com.example.pokemonapp.data.model.Move
 import com.example.pokemonapp.data.model.Moves
 
-class MovesAdapter(val data: Moves, private val context: Context) :
-    RecyclerView.Adapter<MovesAdapter.ViewHolder>(), Filterable {
+class MovesAdapter(var data: Moves, private val context: Context) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
-    internal var filterListResult: List<Move> = data.moves
-    var onItemsClick: ((Move) -> Unit)? = null
+    companion object {
+        const val VIEW_TYPE_ITEM = 0
+        const val VIEW_TYPE_LOADING = 1
+        var CURRENT_PAGE = 1
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView =
-            LayoutInflater.from(context).inflate(R.layout.layout_move_item, parent, false)
-        return ViewHolder(itemView)
+    internal var filterListResult: List<Move?>
+
+    init {
+        filterListResult = data.moves
+    }
+
+    var onItemsClick: ((Move?) -> Unit)? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+        return if (viewType == VIEW_TYPE_ITEM) {
+            val itemView =
+                LayoutInflater.from(context).inflate(R.layout.layout_move_item, parent, false)
+            ContentViewHolder(itemView)
+        } else {
+            val itemView =
+                LayoutInflater.from(context).inflate(R.layout.loadmore_item, parent, false)
+            ContentLoadingViewHolder(itemView)
+        }
+
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ContentViewHolder) {
+            val move = data.moves[position]
+            move?.let {
+                holder.name.text = move.name
+                Glide.with(context).load(Type.TYPE[move.type]).into(holder.image)
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (data.moves[position] == null) return VIEW_TYPE_LOADING
+        return VIEW_TYPE_ITEM
     }
 
     override fun getItemCount(): Int {
-        return filterListResult.size
+        return data.moves.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val move = filterListResult[position]
-        holder.name.text = move.name
-        Glide.with(context).load(Type.TYPE[move.type]).into(holder.image)
-    }
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image)
         val name: TextView = itemView.findViewById(R.id.textTitle)
 
@@ -48,6 +76,8 @@ class MovesAdapter(val data: Moves, private val context: Context) :
         }
     }
 
+    inner class ContentLoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(p0: CharSequence?): FilterResults {
@@ -55,9 +85,9 @@ class MovesAdapter(val data: Moves, private val context: Context) :
                 filterListResult = if (searchQuery.isEmpty()) {
                     data.moves
                 } else {
-                    val result = ArrayList<Move>()
+                    val result = ArrayList<Move?>()
                     for (item in data.moves) {
-                        if (item.name.toLowerCase().contains(searchQuery.toLowerCase())) {
+                        if (item?.name?.toLowerCase()?.contains(searchQuery.toLowerCase())!!) {
                             result.add(item)
                         }
                     }
@@ -75,4 +105,5 @@ class MovesAdapter(val data: Moves, private val context: Context) :
 
         }
     }
+
 }

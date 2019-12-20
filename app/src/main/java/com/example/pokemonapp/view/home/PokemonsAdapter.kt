@@ -16,40 +16,43 @@ import com.example.pokemonapp.data.model.Pokemon
 import com.example.pokemonapp.data.model.Pokemons
 
 class PokemonsAdapter(val data: Pokemons, private val context: Context) :
-    RecyclerView.Adapter<PokemonsAdapter.ViewHolder>(), Filterable {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
-    internal var filterListResult: List<Pokemon> = data.pokemons
-
-
-    var onItemsClick: ((Pokemon) -> Unit)? = null
-    var onLongClick: ((Pokemon) -> Unit)? = null
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView =
-            LayoutInflater.from(context).inflate(R.layout.layout_pokemon_items, parent, false)
-        return ViewHolder(itemView)
+    companion object {
+        const val VIEW_ITEM = 0
+        const val LOAD_ITEM = 1
     }
 
-    override fun getItemCount(): Int {
-        return filterListResult.size
-    }
+    var currentPage = 1
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val pokemon = filterListResult[position]
-        holder.name.text = pokemon.name
-        holder.id.text = pokemon.id
-        val glide = Glide.with(context)
-        glide.load(pokemon.image).into(holder.image)
-        if (pokemon.pokemonTypes.size >= 2) {
-            glide.load(Type.TYPE[pokemon.pokemonTypes[0]]).into(holder.imageType01)
-            glide.load(Type.TYPE[pokemon.pokemonTypes[1]]).into(holder.imageType02)
-        } else if (pokemon.pokemonTypes.size == 1) {
-            glide.load(Type.TYPE[pokemon.pokemonTypes[0]]).into(holder.imageType01)
-            holder.imageType02.visibility = View.INVISIBLE
+    internal var filterListResult: ArrayList<Pokemon?> = ArrayList(data.pokemons)
+
+
+    var onItemsClick: ((Pokemon?) -> Unit)? = null
+    var onLongClick: ((Pokemon?) -> Unit)? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == VIEW_ITEM) {
+            val itemView =
+                LayoutInflater.from(context).inflate(R.layout.layout_pokemon_items, parent, false)
+            ContentViewHolder(itemView)
+        } else {
+            val itemView =
+                LayoutInflater.from(context).inflate(R.layout.loadmore_item, parent, false)
+            ContentLoadingViewHolder(itemView)
         }
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    override fun getItemCount(): Int {
+        return data.pokemons.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (data.pokemons[position] == null) return LOAD_ITEM
+        return VIEW_ITEM
+    }
+
+    inner class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.imagePokemon)
         val name: TextView = itemView.findViewById(R.id.textPokemonName)
         val id: TextView = itemView.findViewById(R.id.textPokemonId)
@@ -68,16 +71,18 @@ class PokemonsAdapter(val data: Pokemons, private val context: Context) :
 
     }
 
+    inner class ContentLoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(p0: CharSequence?): FilterResults {
                 val searchQuery = p0.toString()
                 filterListResult = if (searchQuery.isEmpty()) {
-                    data.pokemons
+                    ArrayList(data.pokemons)
                 } else {
-                    val result = ArrayList<Pokemon>()
+                    val result = ArrayList<Pokemon?>()
                     for (item in data.pokemons) {
-                        if (item.name.toLowerCase().contains(searchQuery.toLowerCase())) {
+                        if (item!!.name.toLowerCase().contains(searchQuery.toLowerCase())) {
                             result.add(item)
                         }
                     }
@@ -89,10 +94,29 @@ class PokemonsAdapter(val data: Pokemons, private val context: Context) :
             }
 
             override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-                filterListResult = p1?.values as List<Pokemon>
+                filterListResult.clear()
+                filterListResult.addAll(p1?.values as ArrayList<Pokemon>)
                 notifyDataSetChanged()
             }
 
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ContentViewHolder) {
+            val pokemon = data.pokemons[position]
+            holder.name.text = pokemon?.name
+            holder.id.text = pokemon?.id
+            val glide = Glide.with(context)
+            glide.load(pokemon?.image).into(holder.image)
+            if (pokemon?.pokemonTypes?.size!! >= 2) {
+                glide.load(Type.TYPE[pokemon.pokemonTypes[0]]).into(holder.imageType01)
+                glide.load(Type.TYPE[pokemon.pokemonTypes[1]]).into(holder.imageType02)
+
+            } else if (pokemon.pokemonTypes.size == 1) {
+                glide.load(Type.TYPE[pokemon.pokemonTypes[0]]).into(holder.imageType01)
+                holder.imageType02.visibility = View.INVISIBLE
+            }
         }
     }
 }

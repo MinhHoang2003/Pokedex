@@ -16,34 +16,47 @@ import com.example.pokemonapp.data.model.Item
 import com.example.pokemonapp.data.model.Items
 
 class ItemsAdapter(val data: Items, private val context: Context) :
-    RecyclerView.Adapter<ItemsAdapter.ViewHolder>(), Filterable {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
-    internal var filterListResult: List<Item>
+    companion object {
+        const val VIEW_ITEM = 0
+        const val LOAD_ITEM = 1
+    }
+
+    var currentPage = 1
+
+
+    internal var filterListResult: List<Item?>
+
 
     init {
         filterListResult = data.items
     }
 
-    var onItemsClick: ((Item) -> Unit)? = null
+    var onItemsClick: ((Item?) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView =
-            LayoutInflater.from(context).inflate(R.layout.layout_items_tem, parent, false)
-        return ViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == VIEW_ITEM) {
+            val itemView =
+                LayoutInflater.from(context).inflate(R.layout.layout_items_tem, parent, false)
+            ContentViewHolder(itemView)
+        } else {
+            val itemView =
+                LayoutInflater.from(context).inflate(R.layout.loadmore_item, parent, false)
+            ContentLoadingViewHolder(itemView)
+        }
     }
 
     override fun getItemCount(): Int {
-        return filterListResult.size
+        return data.items.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = filterListResult[position]
-        holder.name.text = item.name
-        holder.price.text = item.price.toString()
-        Glide.with(context).load(item.image).into(holder.image)
+    override fun getItemViewType(position: Int): Int {
+        if (data.items[position] == null) return LOAD_ITEM
+        return VIEW_ITEM
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.imageBall)
         val name: TextView = itemView.findViewById(R.id.textItemName)
         val price: TextView = itemView.findViewById(R.id.textItemPrice)
@@ -55,6 +68,8 @@ class ItemsAdapter(val data: Items, private val context: Context) :
         }
     }
 
+    inner class ContentLoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(p0: CharSequence?): FilterResults {
@@ -62,10 +77,10 @@ class ItemsAdapter(val data: Items, private val context: Context) :
                 filterListResult = if (query.isEmpty()) {
                     data.items
                 } else {
-                    val result = ArrayList<Item>()
+                    val result = ArrayList<Item?>()
                     Log.d("search", p0.toString())
                     for (item in data.items) {
-                        if (item.name.toLowerCase().contains(query.toLowerCase())) {
+                        if (item?.name?.toLowerCase()?.contains(query.toLowerCase())!!) {
                             Log.d("search", "${item.name} + ${item.name.contains(query)}")
                             result.add(item)
                         }
@@ -82,6 +97,17 @@ class ItemsAdapter(val data: Items, private val context: Context) :
                 notifyDataSetChanged()
             }
 
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ContentViewHolder) {
+            val item = filterListResult[position]
+            if (item != null) {
+                holder.name.text = item.name
+                holder.price.text = item.price.toString()
+                Glide.with(context).load(item.image).into(holder.image)
+            }
         }
     }
 }

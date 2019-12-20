@@ -6,11 +6,11 @@ import com.example.pokemonapp.data.remote.Service
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class MoveRepository(val service: Service) {
+class MoveRepository(private val service: Service) {
 
-    suspend fun getMoves(): Result<Moves?> {
+    suspend fun getMoves(page: Int?): Result<Moves?> {
         return withContext(Dispatchers.IO) {
-            val response = service.getMoves()
+            val response = service.getMoves(page)
             if (response.isSuccessful) {
                 return@withContext Result.Succeess(response.body())
             } else return@withContext Result.Error(Exception(response.message()))

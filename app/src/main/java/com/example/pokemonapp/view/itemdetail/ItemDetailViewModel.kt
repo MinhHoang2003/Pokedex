@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class ItemDetailViewModel : ViewModel() {
 
-    private val service: Service = RemoteClient.getClien().create(Service::class.java)
+    private val service: Service = RemoteClient.getClient().create(Service::class.java)
     val itemRepository = ItemRepository(service)
 
     private val _item = MutableLiveData<Item>()

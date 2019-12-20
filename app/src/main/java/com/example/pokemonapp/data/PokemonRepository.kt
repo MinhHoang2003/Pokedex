@@ -9,10 +9,10 @@ import kotlinx.coroutines.withContext
 
 class PokemonRepository(val service: Service) {
 
-    suspend fun getPokemons(): Result<Pokemons?> {
+    suspend fun getPokemons(page: Int): Result<Pokemons?> {
         return withContext(Dispatchers.IO) {
             getThreadName("getPokemons")
-            val response = service.getPokemons()
+            val response = service.getPokemons(page)
             if (response.isSuccessful) {
                 return@withContext Result.Succeess(response.body())
             } else return@withContext Result.Error(Exception(response.message()))
